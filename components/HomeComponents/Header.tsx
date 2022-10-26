@@ -6,6 +6,9 @@ import {
     ShoppingBagIcon,
     UserIcon
 } from "@heroicons/react/outline"
+import { selectCartItems } from '../../features'
+import { useSelector } from 'react-redux'
+
 
 type Props = {}
 
@@ -13,6 +16,9 @@ const  Header = (props: Props) => {
 
     /* --- variable --- */
     const session = false;
+
+    /** useSelector **/
+    const items = useSelector(selectCartItems)
 
     return (
         <header className="sticky top-0 z-10 w-full flex items-center justify-between bg-[#e7ecee] p-4">
@@ -39,11 +45,13 @@ const  Header = (props: Props) => {
                 <SearchIcon className = "headerIcon"/>
                 <Link href = "/checkout">
                     <div className = "relative cursor-pointer">
-                        <span 
-                            className = "absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500 text-[10px] text-white"
-                        >
-                            5
-                        </span>
+                        { !!items.length && (
+                            <span 
+                                className = "absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500 text-[10px] text-white"
+                            >
+                                {items.length}
+                            </span>
+                        )}
                         <ShoppingBagIcon className = "headerIcon"/>
                     </div> 
                 </Link>
@@ -63,8 +71,8 @@ const  Header = (props: Props) => {
                         <UserIcon className = "headerIcon" onClick = {() => {}}/>
                     )
                 }
-                </div>
-                </header>
+            </div>
+        </header>
     )
 
 }

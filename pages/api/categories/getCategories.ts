@@ -4,14 +4,20 @@ import { Category } from '../../../types'
 import {sanityClient, getCategoriesQuery} from "../../../lib"
 import status  from 'http-status-codes'
 type Data = {
-    categories: Category[],
-    success: boolean
+	categories?: Category[],
+	success: boolean,
+	error?: any
 }
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
+	req: NextApiRequest,
+	res: NextApiResponse<Data>
 ) {
-    const categories = await sanityClient.fetch(getCategoriesQuery)
-    res.status(status.OK).json({categories, success: true});
+	try {
+		const categories = await sanityClient.fetch(getCategoriesQuery)
+		res.status(status.OK).json({categories, success: true});
+	} catch (e: any) {
+		/* handle error */
+		res.status(status.INTERNAL_SERVER_ERROR).json({error: e, success: false});
+	}
 }                                    

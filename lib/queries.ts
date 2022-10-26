@@ -9,6 +9,5 @@ export const getCategoriesQuery = groq`*[_type == "category"]
 export const getProductsQuery = groq`*[_type == "product"]
 {
     _id,
-    "categories": categories[]->title,
     ...
 } | order(_createdAt asc)`

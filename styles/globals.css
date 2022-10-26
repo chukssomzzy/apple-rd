@@ -27,4 +27,10 @@
         background: linear-gradient(to right, #ec4895, #84fc56) left bottom no-repeat;
         background-size: 100% 2px;
     }
+    .shoppingCart {
+        @apply flex  h-16 w-16 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500 md:h-[70px] md:w-[70px];
+    }
+    .tabPanel {
+        @apply grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3;
+    }
 }
